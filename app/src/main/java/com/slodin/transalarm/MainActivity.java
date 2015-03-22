@@ -66,15 +66,11 @@ public class MainActivity extends ActionBarActivity implements
 
 
 
+
     @Override
     @JavascriptInterface
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
-        //Check if the GPS is enabled,if not open the activity for the user to set it on
-        displayPromptForEnablingGPS(this);
 
         setContentView(R.layout.activity_main);
 
@@ -92,7 +88,7 @@ public class MainActivity extends ActionBarActivity implements
         webSetting.setJavaScriptEnabled(true);
         webView.getSettings().setBuiltInZoomControls(true);
 
-        Toast.makeText(getApplicationContext(), "Debug: "+"Height: " + (screenHeight) +"   " + "Width: " + screenWidth, Toast.LENGTH_LONG ).show();
+        //Toast.makeText(getApplicationContext(), "Debug: "+"Height: " + (screenHeight) +"   " + "Width: " + screenWidth, Toast.LENGTH_LONG ).show();
 
         if(screenWidth == 720 && screenHeight == 1280) {
             webView.setInitialScale(97);
@@ -142,31 +138,55 @@ public class MainActivity extends ActionBarActivity implements
     }
 
 
-    public static void displayPromptForEnablingGPS(
-            final Activity activity)
-    {
-        final AlertDialog.Builder builder =
-                new AlertDialog.Builder(activity);
-        final String action = Settings.ACTION_LOCATION_SOURCE_SETTINGS;
-        final String message = "Enable either GPS or any other location"
-                + " service to find current location.  Click OK to go to"
-                + " location services settings to let you do so.";
+    //Activity onDestroy should remove all geofences and disconnect from Google Play Services
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        removeGeofencesHandler();
+        mGoogleApiClient.disconnect();
 
-        builder.setMessage(message)
-                .setPositiveButton("OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface d, int id) {
-                                activity.startActivity(new Intent(action));
-                                d.dismiss();
-                            }
-                        })
-                .setNegativeButton("Cancel",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface d, int id) {
-                                d.cancel();
-                            }
-                        });
-        builder.create().show();
+    }
+
+
+    protected boolean checkGPSisEnabled(){
+
+      //get the last known location - the current location
+       Location mLastLocation;
+       mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+      if (mLastLocation != null){
+            return true;
+            //Toast.makeText(this, "GPS is Enabled in your device", Toast.LENGTH_SHORT).show();
+        }else{
+          return false;
+        }
+    }
+
+
+    public static void displayPromptForEnablingGPS(
+
+            final Activity activity){
+                final AlertDialog.Builder builder =
+                        new AlertDialog.Builder(activity);
+                final String action = Settings.ACTION_LOCATION_SOURCE_SETTINGS;
+                final String message = "The GPS is disabled."
+                        + " Please enable it to continue.";
+
+                builder.setMessage(message)
+                        .setPositiveButton("OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface d, int id) {
+                                        activity.startActivity(new Intent(action));
+                                        d.dismiss();
+                                    }
+                                })
+                        .setNegativeButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface d, int id) {
+                                        d.cancel();
+                                    }
+                                });
+                builder.create().show();
     }
 
     /**
@@ -370,7 +390,9 @@ public class MainActivity extends ActionBarActivity implements
                             // transition. We track entry and exit transitions in this sample.
                     .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
 
-                            //.setLoiteringDelay(3000)
+                            //Sets the best-effort notification responsiveness of the geofence.
+                    .setNotificationResponsiveness(0)
+
                             // Create the geofence.
                     .build());
         }
@@ -469,18 +491,25 @@ public class MainActivity extends ActionBarActivity implements
 
     protected Float getSpeed(){
 
-        Float speed;
+        try {
 
-        //get the last known location - the current location
-        Location mLastLocation;
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                mGoogleApiClient);
+            Float speed;
 
-        //returns in Km/h
-        speed = (mLastLocation.getSpeed() * (3.6f));
+            //get the last known location - the current location
+            Location mLastLocation;
+            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                    mGoogleApiClient);
 
-        return  (speed);
-        //Toast.makeText(this,"Speed: " + speed, Toast.LENGTH_LONG).show();
+            //returns in Km/h
+            speed = (mLastLocation.getSpeed() * (3.6f));
+
+            return (speed);
+            //Toast.makeText(this,"Speed: " + speed, Toast.LENGTH_LONG).show();
+        }catch(Exception e){
+            Log.e(TAG, e.toString());
+            return null;
+        }
+
     }
 
 
@@ -511,6 +540,8 @@ public class MainActivity extends ActionBarActivity implements
             mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                     mGoogleApiClient);
 
+
+
             //Toast.makeText(this,"Current Location (Lat/Long): " + mLastLocation.getLatitude() + " - " +  mLastLocation.getLongitude(), Toast.LENGTH_LONG).show();
 
             //calculates the distance from current location to the destination
@@ -525,6 +556,7 @@ public class MainActivity extends ActionBarActivity implements
 
         }catch(Exception e){
             Toast.makeText(this, "Sorry, we got an error when getting the distance :/", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, e.toString());
             return null;
         }
 
@@ -596,33 +628,46 @@ public class MainActivity extends ActionBarActivity implements
             try{
 
 
+                    //****************CHECK IF GPS IS ENABLED***************
+                    // Check if the GPS is enabled,if not open the activity for the user to set it on
+                    //If it is not enabled then call the function to open a dialog and activate it,
+                    //if it's enabled go on
+
+                    if(!checkGPSisEnabled()){
+
+                        displayPromptForEnablingGPS(MainActivity.this);
+
+                    }else{
 
 
-                    //gets the coordinates in LatLng object
-                    LatLng latLng =  parseLatitudeLongitude(coordinates);
+                        //gets the coordinates in LatLng object
+                        LatLng latLng =  parseLatitudeLongitude(coordinates);
 
 
-                    //Populate the DESTINATION and remove the hard-coded selected station from the Geofences List
-                    populateGeofenceDestination(stationId,latLng);
+                        //Populate the DESTINATION and remove the hard-coded selected station from the Geofences List
+                        populateGeofenceDestination(stationId,latLng);
 
-                    //the app creates the Geofence Handler, which will watch for events to ttrigger
-                    addGeofencesHandler();
-
-
-                    String distanceTo = distanceTo(coordinates);
-                    String estimatedTime = getEstimatedArrivalTime(distanceTo,getSpeed());
-
-                    //Toast.makeText(mContext,"Setting up your destination..." , Toast.LENGTH_SHORT).show();
-
-                    //Toast.makeText(mContext,"Distance to " + stationLabel + ": " + distanceTo + " Km" , Toast.LENGTH_SHORT).show();
-                    Toast.makeText(mContext,"Estimated Travel Time: " + estimatedTime + " Minutes" , Toast.LENGTH_SHORT).show();
+                        //the app creates the Geofence Handler, which will watch for events to ttrigger
+                        addGeofencesHandler();
 
 
-                    Intent afterSelect = new Intent(mContext, calPage.class)
-                                    .putExtra(Intent.EXTRA_TEXT, stationId)
-                                    .putExtra(Intent.EXTRA_SHORTCUT_NAME, stationLabel)
-                                    .putExtra(Intent.EXTRA_TITLE,estimatedTime);
-                    startActivity(afterSelect);
+                        String distanceTo = distanceTo(coordinates);
+                        String estimatedTime = getEstimatedArrivalTime(distanceTo,getSpeed());
+
+                        //Toast.makeText(mContext,"Setting up your destination..." , Toast.LENGTH_SHORT).show();
+
+                        //Toast.makeText(mContext,"Distance to " + stationLabel + ": " + distanceTo + " Km" , Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext,"Estimated Travel Time: " + estimatedTime + " Minutes" , Toast.LENGTH_SHORT).show();
+
+
+                        Intent afterSelect = new Intent(mContext, calPage.class)
+                                        .putExtra(Intent.EXTRA_TEXT, stationId)
+                                        .putExtra(Intent.EXTRA_SHORTCUT_NAME, stationLabel)
+                                        .putExtra(Intent.EXTRA_TITLE, estimatedTime);
+                        startActivity(afterSelect);
+
+
+                    }
 
             }catch(Exception e ){
                 Log.e(TAG, e.toString());
