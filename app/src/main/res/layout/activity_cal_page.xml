@@ -1,0 +1,59 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.slodin.transalarm.calPage"
+    android:background="@drawable/calpage_xhdpi">
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton"
+        android:src="@drawable/stopbutton"
+        android:layout_marginBottom="39dp"
+        android:background="@android:color/transparent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/stationSelect"
+        android:layout_alignEnd="@+id/stationSelect"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Waterfront Station"
+        android:id="@+id/stationSelect"
+        android:textSize="40sp"
+        android:gravity="center"
+        android:textColor="#ffffffff"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Estimated Travel Time:"
+        android:id="@+id/estimateStatic"
+        android:layout_marginTop="96dp"
+        android:textSize="30sp"
+        android:layout_below="@+id/stationSelect"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffffff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="15:35"
+        android:id="@+id/estimateTimeLabel"
+        android:textSize="50sp"
+        android:gravity="center"
+        android:layout_below="@+id/estimateStatic"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffffff" />
+</RelativeLayout>

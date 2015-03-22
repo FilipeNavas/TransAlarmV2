@@ -1,0 +1,39 @@
+body
+{
+	padding:0;
+	background-color:#eaeaea;
+}
+
+#map
+{
+	position:absolute;
+	width:3145;
+	height:1057;
+	top: 0px;
+	left:0;
+	right:0;
+}
+
+#west
+{
+	position:absolute;
+	width:1048;
+	height:1057;
+}
+
+#middle
+{
+	position:absolute;
+	width:1049;
+	height:1057;
+	left:1048;
+}
+
+#east
+{
+	position:absolute;
+	width:1048;
+	height:1057;
+	left:2097;
+}
+

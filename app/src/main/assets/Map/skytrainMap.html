@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>Map</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="format.css">
+<script language="javascript">
+
+   function callNewIntent(Object){
+        Android.setDestination(Object.id, Object.alt, Object.title);
+   }
+
+</script>
+</head>
+<body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"/>
+
+<div id=map>
+	<div id=west>
+		<img src="images/skytrainMap_01.jpg" usemap="#westMap"/>
+		<map name="westMap">
+			<area alt="Waterfront Station"  id="waterfront" onClick="callNewIntent(this);" title="49.285879, -123.111773" shape="rect" coords="389,184,434,231"  />
+			<area alt="Burrard Station"     id="burrard" onClick="callNewIntent(this);"  title="49.285727,-123.119530"  shape="rect" coords="332,324,285,274" />
+			<area alt="Granville Station"   id="granville" onClick="callNewIntent(this);"  title=""  shape="rect" coords="520,276,564,325" />
+			<area alt="Stadium Station"     id="stadium" onClick="callNewIntent(this);"  title=""  shape="rect" coords="703,277,749,326" />
+			<area alt="Main-Street/Science World Station" id="main" onClick="callNewIntent(this);"  title="" href="#" shape="rect" coords="879,277,924,325" />
+			<area alt="VCC-Clark Station"   id="vcc" onClick="callNewIntent(this);"  title="" href="#" shape="rect" coords="818,515,865,562" />
+			<area alt="Commercial Station"  id="commercial" onClick="callNewIntent(this);"  title="" href="#" shape="rect" coords="956,607,1047,514" />
+			<area alt="Lonsdale Quay"       id="lonsdale" onClick="callNewIntent(this);"  title="" href="#" shape="rect" coords="643,32,689,80" />
+		</map>
+	</div>
+	<div id=middle>
+		<img src="images/skytrainMap_02.jpg" usemap="#middleMap"/>
+		<map name="middleMap">
+			<area alt="Commercial Station"    id="commercial2" onClick="callNewIntent(this);" title="" href="#" shape="rect" coords="0,513,29,565" />
+			<area alt="Renfrew Station"       id="renfrew" onClick="callNewIntent(this);"  title="" href="#" shape="rect" coords="116,513,163,562" />
+			<area alt="Rupert Station"        id="rupert" onClick="callNewIntent(this);" title="" href="#" shape="rect" coords="255,514,303,562" />
+			<area alt="Gilmore Station"       id="gilmore" onClick="callNewIntent(this);" title="" href="#" shape="rect" coords="400,514,448,563" />
+			<area alt="Brentwood Town Centre Station" id="brentwood" onClick="callNewIntent(this);" title="" href="#" shape="rect" coords="545,514,593,562" />
+            <area alt="Holdom Station"        id="holdom" onClick="callNewIntent(this);" title="" href="#" shape="rect" coords="692,514,741,564" />
+			<area alt="Sperling Station"      id="sperling" onClick="callNewIntent(this);"  title="" href="#" shape="rect" coords="834,513,882,563" />
+			<area alt="Lake City Way Station" id="lakecity" onClick="callNewIntent(this);"  title="" href="#" shape="rect" coords="984,514,1031,564" />
+			
+			<area alt="Nanaimo Station"     id="nanaimo" onClick="callNewIntent(this);" title="" href="#" shape="rect" coords="32,843,82,894" />
+			<area alt="29th Ave Station"    id="29th" onClick="callNewIntent(this);"  title="" href="#" shape="rect" coords="163,843,211,894" />
+			<area alt="Joyce Station"       id="joyce" onClick="callNewIntent(this);"  title="" href="#" shape="rect" coords="288,843,336,894" />
+			<area alt="Patterson Station"   id="patterson" onClick="callNewIntent(this);"  title="49.229851,-123.012620" href="#" shape="rect" coords="418,843,466,893" />
+			<area alt="Metrotown Station"   id="metrotown" onClick="callNewIntent(this);"  title="" href="#" shape="rect" coords="542,843,590,893" />
+			<area alt="Royal Oak Station"   id="royaloak" onClick="callNewIntent(this);"  title="" href="#" shape="rect" coords="673,843,722,891" />
+			<area alt="Edmonds Station"     id="edmonds" onClick="callNewIntent(this);"  title="" href="#" shape="rect" coords="796,844,843,892" />
+			<area alt="22nd Street Station" id="22nd" onClick="callNewIntent(this);"  title="" href="#" shape="rect" coords="928,843,976,894" />
+		</map>
+	</div>
+	<div id=east>
+		<img src="images/skytrainMap_03.jpg" usemap="#eastMap"/>
+		<map name="eastMap">
+			<area alt="Production Way Station" id="productionway" onClick="callNewIntent(this);"  title="" href="#" shape="rect" coords="84,515,131,563" />
+			<area alt="Lougheed Station"       id="lougheed" onClick="callNewIntent(this);"  title="" href="#" shape="rect" coords="189,530,237,579" />
+			<area alt="Braid"                  id="braid" onClick="callNewIntent(this);"  title="" href="#" shape="rect" coords="208,610,256,658" />
+			<area alt="Sapperton"              id="sapperton" onClick="callNewIntent(this);"  title="" href="#" shape="rect" coords="207,694,255,741" />
+			
+			<area alt="New Westminster Station"  id="newwest" onClick="callNewIntent(this);"  title="" href="#" shape="rect" coords="0,844,45,894" />
+			<area alt="Columbia Station"         id="columbia" onClick="callNewIntent(this);"  title="" href="#" shape="rect" coords="126,843,173,894" />
+			<area alt="Scott Road Station"       id="scottroad" onClick="callNewIntent(this);"   title="49.204386, -122.874179" title="" href="#" shape="rect" coords="421,732,468,781" />
+			<area alt="Gateway Station"          id="gateway" onClick="callNewIntent(this);" title="" href="#" shape="rect" coords="573,731,622,781" />
+			<area alt="Surrey Central Station"   id="surreycentral" onClick="callNewIntent(this);"  title="" href="#" shape="rect" coords="725,730,770,781" />
+			<area alt="King George Station"      id="kinggeorge" onClick="callNewIntent(this);"  title="" href="#" shape="rect" coords="874,732,921,781" />
+			
+			<area alt="Port Moody"        id="portmoody" onClick="callNewIntent(this);" title="" href="#" shape="rect" coords="378,169,426,220" />
+			<area alt="Coquitlam Central" id="coquitlam" onClick="callNewIntent(this);"  title="" href="#" shape="rect" coords="597,169,643,218" />
+
+
+		</map>
+	</div>
+</div>
+
+
+
+</body>
+</html>
