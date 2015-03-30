@@ -17,7 +17,6 @@ import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
 
-
 import java.util.List;
 
 /**
@@ -40,6 +39,36 @@ public class SettingsActivity extends PreferenceActivity {
      */
     private static final boolean ALWAYS_SIMPLE_PREFS = false;
 
+/*
+    public void getSeekBar(){
+        android.widget.SeekBar seekBar;
+        final TextView textView;
+
+        seekBar = (SeekBar) findViewById(R.id.seekBar1);
+        textView = (TextView) findViewById(R.id.textView1);
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            int progress = 0;
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
+                progress = progresValue;
+                Toast.makeText(getApplicationContext(), "Changing seekbar's progress", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                Toast.makeText(getApplicationContext(), "Started tracking seekbar", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                textView.setText("Covered: " + progress + "/" + seekBar.getMax());
+                Toast.makeText(getApplicationContext(), "Stopped tracking seekbar", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }*/
+
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -61,6 +90,7 @@ public class SettingsActivity extends PreferenceActivity {
         // In the simplified UI, fragments are not used at all and we instead
         // use the older PreferenceActivity APIs.
 
+
         // Add 'general' preferences.
         addPreferencesFromResource(R.xml.pref_general);
 
@@ -79,10 +109,18 @@ public class SettingsActivity extends PreferenceActivity {
         // Bind the summaries of EditText/List/Dialog/Ringtone preferences to
         // their values. When their values change, their summaries are updated
         // to reflect the new value, per the Android Design guidelines.
-        bindPreferenceSummaryToValue(findPreference("example_text"));
-        bindPreferenceSummaryToValue(findPreference("example_list"));
+        /*bindPreferenceSummaryToValue(findPreference("example_text"));
+        bindPreferenceSummaryToValue(findPreference("example_list"));*/
         bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));
         bindPreferenceSummaryToValue(findPreference("sync_frequency"));
+
+
+        bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_default_destination_key)));
+        //bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_unit_key)));
+
+
+
+
     }
 
     /**
@@ -168,7 +206,6 @@ public class SettingsActivity extends PreferenceActivity {
                         preference.setSummary(name);
                     }
                 }
-
             } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
@@ -216,6 +253,8 @@ public class SettingsActivity extends PreferenceActivity {
             // guidelines.
             bindPreferenceSummaryToValue(findPreference("example_text"));
             bindPreferenceSummaryToValue(findPreference("example_list"));
+
+
         }
     }
 

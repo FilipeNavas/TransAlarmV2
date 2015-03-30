@@ -47,6 +47,8 @@
 
     <string name="geofence_transition_notification_text">Click notification to return to app</string>
 
-
+    <!--Preferences-->
+    <string name="pref_default_destination_key">default_destination</string>
+    <string name="pref_default_destination_value">Waterfront</string>
 
 </resources>

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -134,6 +135,15 @@ public class MainActivity extends ActionBarActivity implements
 
         // Kick off the request to build GoogleApiClient.
         buildGoogleApiClient();
+
+
+
+
+        /************* GET THE PREFERENCES **************/
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String defaultDestination = prefs.getString(getString(R.string.pref_default_destination_key),getString(R.string.pref_default_destination_value));
+
+        Toast.makeText(getApplicationContext(), "Default Destination: " + defaultDestination, Toast.LENGTH_LONG ).show();
 
     }
 
