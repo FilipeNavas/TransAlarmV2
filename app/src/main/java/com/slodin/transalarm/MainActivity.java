@@ -143,7 +143,7 @@ public class MainActivity extends ActionBarActivity implements
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String defaultDestination = prefs.getString(getString(R.string.pref_default_destination_key),getString(R.string.pref_default_destination_value));
 
-        Toast.makeText(getApplicationContext(), "Default Destination: " + defaultDestination, Toast.LENGTH_LONG ).show();
+        //Toast.makeText(getApplicationContext(), "Default Destination: " + defaultDestination, Toast.LENGTH_LONG ).show();
 
     }
 
@@ -441,6 +441,8 @@ public class MainActivity extends ActionBarActivity implements
                             // Set the transition types of interest. Alerts are only generated for these
                             // transition. We track entry and exit transitions in this sample.
                     .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
+
+                    .setNotificationResponsiveness(0)
 
                             //.setLoiteringDelay(3000)
                             // Create the geofence.

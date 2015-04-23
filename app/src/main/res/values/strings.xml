@@ -41,7 +41,7 @@
     </string>
 
     <!-- Transition type strings -->
-    <string name="geofence_transition_entered">You\'ve entered</string>
+    <string name="geofence_transition_entered"></string>
     <string name="geofence_transition_dwell">You\'re at</string>
     <string name="unknown_geofence_transition">Unknown Transition</string>
 
@@ -50,5 +50,13 @@
     <!--Preferences-->
     <string name="pref_default_destination_key">default_destination</string>
     <string name="pref_default_destination_value">Waterfront</string>
+    <string name="pref_title_set_default_destination">Set default destination</string>
+
+    <string name="title_activity_settings">Settings</string>
+
+
+
+
+
 
 </resources>

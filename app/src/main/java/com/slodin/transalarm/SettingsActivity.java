@@ -1,10 +1,15 @@
 package com.slodin.transalarm;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.Toast;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings.
@@ -16,6 +21,9 @@ import android.preference.PreferenceManager;
  */
 public class SettingsActivity extends PreferenceActivity
         implements Preference.OnPreferenceChangeListener {
+
+    private SeekBar seekBar;
+    private TextView textView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,6 +38,8 @@ public class SettingsActivity extends PreferenceActivity
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_default_destination_key)));
         //bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_unit_key)));
 
+
+
     }
 
     /**
@@ -39,7 +49,7 @@ public class SettingsActivity extends PreferenceActivity
      */
     private void bindPreferenceSummaryToValue(Preference preference) {
         // Set the listener to watch for value changes.
-        preference.setOnPreferenceChangeListener(this.getApplicationContext());
+        preference.setOnPreferenceChangeListener(this);
 
         // Trigger the listener immediately with the preference's
         // current value.
@@ -67,5 +77,105 @@ public class SettingsActivity extends PreferenceActivity
         }
         return true;
     }
+
+
+   /* public void getSeekBar(){
+
+        seekBar = (SeekBar) findViewById(R.id.seekBar1);
+        textView = (TextView) findViewById(R.id.textView1);
+        // Initialize the textview with '0'
+        textView.setText(seekBar.getProgress() + "/" + seekBar.getMax());
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            int progress = 0;
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
+                progress = progresValue;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // Do something here, if you want to do anything at the start of
+                // touching the seekbar
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                // Display the value in textview
+                textView.setText(progress + "/" + seekBar.getMax());
+            }
+        });
+    }
+*/
+
+
+
+
+    public class Filters extends Activity implements OnSeekBarChangeListener{
+        private SeekBar Slider; // declare seekbar object variable
+        // declare text label objects
+        private TextView PRICEtextProgress;
+        /** Called when the activity is first created. */
+        @Override
+        public void onCreate(Bundle savedInstanceState)
+        {
+            super.onCreate(savedInstanceState);
+            // load the layout
+            setContentView(R.layout.slider_layout);
+            Slider = (SeekBar)findViewById(R.id.seekBar1); // make seekbar object
+            Slider.setOnSeekBarChangeListener(this);
+            Slider.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                    // TODO Auto-generated method stub
+
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                    // TODO Auto-generated method stub
+
+                }
+
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress,
+                                              boolean fromUser) {
+                    // TODO Auto-generated method stub
+                    PRICEtextProgress = (TextView)findViewById(R.id.SlidertextViewProgressID);
+                    PRICEtextProgress.setText("Distance: " + progress);
+                    Toast.makeText(getApplicationContext(), "Dentro aqui 1", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+        }
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            if (seekBar == Slider)
+                PRICEtextProgress.setText("Distance: " + progress);
+            Toast.makeText(this, "Dentro aqui", Toast.LENGTH_SHORT).show();
+
+        }
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+            // TODO Auto-generated method stub
+
+        }
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+            // TODO Auto-generated method stub
+
+        }
+
+
+
+    }
+
+
+
+
+
+
 
 }

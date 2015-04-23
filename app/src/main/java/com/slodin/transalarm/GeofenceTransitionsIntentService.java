@@ -23,6 +23,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
@@ -46,6 +49,13 @@ public class GeofenceTransitionsIntentService extends IntentService {
 
     protected static final String TAG = "geofence-service";
 
+    protected  static  Ringtone r = null;
+
+    Utilities u = null;
+
+    //Used to set off and stop the alarm
+    protected Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+
     /**
      * This constructor is required, and calls the super IntentService(String)
      * constructor with the name for a worker thread.
@@ -57,7 +67,12 @@ public class GeofenceTransitionsIntentService extends IntentService {
 
     @Override
     public void onCreate() {
+
         super.onCreate();
+
+
+
+        u = new Utilities();
     }
 
     /**
@@ -79,7 +94,7 @@ public class GeofenceTransitionsIntentService extends IntentService {
         int geofenceTransition = geofencingEvent.getGeofenceTransition();
 
         // Test that the reported transition was of interest.
-        if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER) {
+        if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER || geofenceTransition == Geofence.GEOFENCE_TRANSITION_DWELL) {
 
             // Get the geofences that were triggered. A single event can trigger multiple geofences.
             List<Geofence> triggeringGeofences = geofencingEvent.getTriggeringGeofences();
@@ -102,14 +117,13 @@ public class GeofenceTransitionsIntentService extends IntentService {
                 if(geofence.getRequestId().equals("DESTINATION")){
                     // Send notification and log the transition details.
                     sendNotification(geofenceTransitionDetails);
-                    Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
-                    // Vibrate for 500 milliseconds
-                    v.vibrate(1000);
+
+                    setOffAlarm();
 
                     //if not,the app will update the UI only
                 }else{
                     // Send notification and log the transition details.
-                    sendNotificationCurrentLocation(geofence.getRequestId());
+                    sendNotificationCurrentLocation(geofence.getRequestId().toUpperCase());
 
                 }
             }
@@ -121,6 +135,17 @@ public class GeofenceTransitionsIntentService extends IntentService {
             Log.e(TAG, getString(R.string.geofence_transition_invalid_type, geofenceTransition));
         }
     }
+
+
+    public void setOffAlarm () {
+        Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+        // Vibrate for 1000 milliseconds
+        v.vibrate(1000);
+        r = RingtoneManager.getRingtone(this, notification);
+        r.play();
+    }
+
+
 
     /**
      * Gets transition details and returns them as a formatted string.
@@ -153,7 +178,7 @@ public class GeofenceTransitionsIntentService extends IntentService {
      */
     private void sendNotification(String notificationDetails) {
         // Create an explicit content Intent that starts the main Activity.
-        Intent notificationIntent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent notificationIntent = new Intent(getApplicationContext(), calPage.class);
 
         // Construct a task stack.
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);

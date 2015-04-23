@@ -21,14 +21,28 @@
     <!-- NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to
          dismiss it. -->
     <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
+    <PreferenceCategory
+        android:title="@string/title_activity_settings"
+        android:key="pref_key_storage_settings">
+
     <ListPreference
-        android:key="pref_default_destination_key"
+        android:key="@string/pref_default_destination_key"
         android:title="@string/pref_title_set_default_destination"
         android:defaultValue="waterfront"
         android:entries="@array/pref_list_destinations"
         android:entryValues="@array/pref_list_destinations_values"
         android:negativeButtonText="@null"
-        android:positiveButtonText="@null" />
+        android:positiveButtonText="@null"
+        android:textSize="16sp"
+        android:textColor="#000000"/>
+    </PreferenceCategory>
+
+
+    <Preference
+        android:title="Slider"
+        android:key="slider_key"
+        android:layout="@xml/slider_layout" />
+
 
 
 <!--

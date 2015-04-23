@@ -1,11 +1,15 @@
 package com.slodin.transalarm;
 
 import android.content.Intent;
+import android.media.Ringtone;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class calPage extends ActionBarActivity {
@@ -40,6 +44,39 @@ public class calPage extends ActionBarActivity {
             ((TextView) findViewById(R.id.estimateTimeLabel)).setText(estimatedTime + " mins");
 
         }
+
+        
+
+        /*************STOP BUTTON**********/
+
+        final ImageButton button = (ImageButton) findViewById(R.id.imageButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                //Stop the alarm
+                //Utilities u = new Utilities();
+
+                ///u.stopAlarm();
+
+                //Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+                //Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+
+                Ringtone r = GeofenceTransitionsIntentService.r;
+
+                if(r.isPlaying() && r != null){
+                    r.stop();
+                    Toast.makeText(getApplicationContext(), "Arrived!!!", Toast.LENGTH_SHORT).show();
+          }
+
+
+                /*GeofenceTransitionsIntentService g = new GeofenceTransitionsIntentService();
+                g.stopAlarm();*/
+
+                //Finish the app
+                /*MainActivity m = new MainActivity();
+                m.onDestroy();*/
+            }
+        });
 
     }
 

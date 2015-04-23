@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/relativeLayoutforSlider"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+    <TextView
+        android:id="@+id/SlidertextViewProgressID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Set default distance"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:textSize="16sp"
+        android:textColor="#000000">
+    </TextView>
+
+        <SeekBar
+        android:id="@+id/seekBar1"
+        android:layout_width="match_parent"
+        android:text="Slide the distance"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="26dp"
+        android:max="2000"
+        />
+
+    <TextView
+        android:id="@+id/SliderInitialValuetextID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/seekBar1"
+        android:text="500 mt" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/SliderFinalValuetextID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/seekBar1"
+        android:text="2000 mt" />
+
+</RelativeLayout>

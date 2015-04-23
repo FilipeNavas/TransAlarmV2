@@ -34,7 +34,7 @@ public final class Constants {
      */
     public static final long GEOFENCE_EXPIRATION_IN_MILLISECONDS =
             GEOFENCE_EXPIRATION_IN_HOURS * 60 * 60 * 1000;
-    public static final float GEOFENCE_RADIUS_IN_METERS = 700; // 1 mile, 1.6 km
+    public static final float GEOFENCE_RADIUS_IN_METERS = 800; // 1 mile, 1.6 km
 
     /**
      * Map for storing information about airports in the San Francisco bay area.
@@ -44,7 +44,7 @@ public final class Constants {
 
       //***** DEBUG AND TEST GEOFENCES ******
        //home, just for testing
-       SKYTRAIN_STATION.put("home", new LatLng(49.230345, -123.010826));
+       //SKYTRAIN_STATION.put("home", new LatLng(49.230345, -123.010826));
 
        //KPU
        SKYTRAIN_STATION.put("KPU", new LatLng(49.132956, -122.872196));
@@ -61,7 +61,9 @@ public final class Constants {
 
         //***************** EXPO LINE ****************
 
-        SKYTRAIN_STATION.put("waterfront", new LatLng(49.285865, -123.111816));
+        //SKYTRAIN_STATION.put("waterfront", new LatLng(49.285865, -123.111816));
+
+        SKYTRAIN_STATION.put("waterfront", new LatLng(49.132956, -122.872196));
 
         SKYTRAIN_STATION.put("burrard", new LatLng(49.285819, -123.119494));
 
@@ -81,7 +83,7 @@ public final class Constants {
 
         SKYTRAIN_STATION.put("patterson", new LatLng(49.229851, -123.012620));
 
-        SKYTRAIN_STATION.put("metrotown", new LatLng(49.225724, -123.003798));
+        //SKYTRAIN_STATION.put("metrotown", new LatLng(49.225724, -123.003798));
 
         SKYTRAIN_STATION.put("royaloak", new LatLng(49.220317, -122.988451));
 

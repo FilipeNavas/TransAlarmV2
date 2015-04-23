@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_list_destinations">
+        <item>Waterfront</item>
+        <item>Burrard</item>
+        <item>Granville</item>
+    </string-array>
+    <string-array name="pref_list_destinations_values">
+        <item>waterfront</item>
+        <item>burrard</item>
+        <item>granville</item>
+    </string-array>
+
+</resources>
